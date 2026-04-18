@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: agent-run-once
+  namespace: analysis
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      serviceAccountName: edsp-agent
+      restartPolicy: Never
+      containers:
+      - name: agent
+        image: alpine:3.19
+        command: ["sh","-c"]
+        args:
+          - |
+            set -e
+            apk add --no-cache curl ca-certificates
+
+            curl -L -o /usr/local/bin/kubectl https://dl.k8s.io/release/v1.29.15/bin/linux/amd64/kubectl
+            chmod +x /usr/local/bin/kubectl
+
+            echo "[can-i create deployment?]"
+            kubectl auth can-i create deployment -n analysis
+
+            echo "[apply deployment]"
+            cat <<'EOF' | kubectl apply -f -
+            apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: agent-deploy-test
+              namespace: analysis
+              labels:
+                app: agent-deploy-test
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: agent-deploy-test
+              template:
+                metadata:
+                  labels:
+                    app: agent-deploy-test
+                spec:
+                  containers:
+                  - name: web
+                    image: nginx:1.25
+                    ports:
+                    - containerPort: 80
+            EOF
+
+            echo "[wait rollout]"
+            kubectl -n analysis rollout status deploy/agent-deploy-test --timeout=120s
+
+            echo "[done]"
+            kubectl -n analysis get deploy,po -l app=agent-deploy-test -o wide

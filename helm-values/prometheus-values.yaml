@@ -1,0 +1,18 @@
+alertmanager:
+  enabled: false
+pushgateway:
+  enabled: false
+server:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  service:
+    type: NodePort
+    nodePort: 30090
+  persistentVolume:
+    enabled: false
+kubeStateMetrics:
+  enabled: true
+nodeExporter:
+  enabled: true

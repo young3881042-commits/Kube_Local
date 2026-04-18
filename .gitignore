@@ -1,0 +1,20 @@
+# env
+env/cluster.env
+
+# build outputs
+**/build/
+**/.gradle/
+**/dist/
+**/node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# logs
+*.log
+
+# temp
+*.tmp
+*.swp
+.DS_Store

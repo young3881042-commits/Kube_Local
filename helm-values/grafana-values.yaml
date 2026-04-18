@@ -1,0 +1,19 @@
+adminPassword: "admin"
+persistence:
+  enabled: false
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+service:
+  type: NodePort
+  nodePort: 31300
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Prometheus
+        type: prometheus
+        url: http://prom-server.monitoring.svc.cluster.local
+        access: proxy
+        isDefault: true
