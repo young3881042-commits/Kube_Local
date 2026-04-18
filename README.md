@@ -1,3 +1,7 @@
+<img width="1920" height="1013" alt="image" src="https://github.com/user-attachments/assets/143a63c5-6cfe-4aed-afa9-501cf6ad629b" />
+
+
+
 # Kubernetes Install Template
 
 이 레포는 Rocky Linux 기반 환경에서 kubeadm + containerd로 Kubernetes 클러스터를 구축하고,
