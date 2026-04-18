@@ -1,5 +1,6 @@
 <img width="1920" height="1013" alt="image" src="https://github.com/user-attachments/assets/143a63c5-6cfe-4aed-afa9-501cf6ad629b" />
 
+<img width="1914" height="1016" alt="image" src="https://github.com/user-attachments/assets/016966f6-cd11-464f-8878-36de364e794d" />
 
 
 # Kubernetes Install Template
