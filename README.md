@@ -18,6 +18,7 @@
 - Prometheus / Grafana
 - Nexus registry
 - agent manifest
+- Jenkins registration / deployment metadata
 
 ## 디렉토리 구조
 
@@ -26,6 +27,8 @@
 - scripts/addons: metrics-server
 - scripts/monitoring: monitoring 설치
 - scripts/registry: Nexus 설정
+- scripts/ci: Jenkins 검증 스크립트
+- env/jenkins.env.example: Jenkins controller/job 설정 예제
 - env: 환경 변수 예제
 - helm-values: Helm values
 - manifests: Kubernetes yaml
@@ -46,3 +49,13 @@ bash scripts/registry/install-nexus.sh
 ## 문서
 
 docs/ 하위 참고
+
+- [Jenkins placement guide](docs/jenkins.md)
+
+## Jenkins 검증
+
+`Jenkinsfile`은 `main` 브랜치 push 기준으로 저장소 구조를 검증합니다.
+
+- `docs/`, `env/` 핵심 파일 존재 여부 확인
+- `scripts/**/*.sh` 문법 검사
+- `manifests/**/*.yaml` 파일 존재 및 비어있지 않음 확인

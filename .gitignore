@@ -1,5 +1,6 @@
 # env
 env/cluster.env
+env/jenkins.env
 
 # build outputs
 **/build/
